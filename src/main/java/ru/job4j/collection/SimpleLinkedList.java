@@ -51,17 +51,11 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
     @Override
     public E get(int index) {
         Objects.checkIndex(index, size);
-        var currentIndex = 0;
         var headTemp = head;
-        while (headTemp != null) {
-            if (currentIndex == index) {
-               return headTemp.getValue();
-           } else {
-                headTemp = headTemp.getNext();
-                currentIndex++;
-            }
+        for (int i = 0; i < index; i++) {
+            headTemp = headTemp.getNext();
         }
-        return null;
+        return headTemp.getValue();
     }
 
     @Override
