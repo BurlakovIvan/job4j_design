@@ -57,8 +57,8 @@ public class SimpleMap<K, V> implements Map<K, V> {
     public V get(K key) {
         var tableValue = table[indexFor(hash(key.hashCode()))];
         return (tableValue == null
-                || (hash(tableValue.key.hashCode()) != hash(key.hashCode())
-                || !tableValue.key.equals(key)))
+                || tableValue.key.hashCode() != key.hashCode()
+                || !tableValue.key.equals(key))
                 ? null : tableValue.value;
     }
 
@@ -67,7 +67,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
         var index = indexFor(hash(key.hashCode()));
         var rsl = false;
         if (table[index] != null
-                && hash(table[index].key.hashCode()) == hash(key.hashCode())
+                && table[index].key.hashCode() == key.hashCode()
                 && table[index].key.equals(key)) {
             table[index].value = null;
             table[index].key = null;
