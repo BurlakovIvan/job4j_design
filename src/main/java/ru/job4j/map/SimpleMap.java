@@ -56,14 +56,19 @@ public class SimpleMap<K, V> implements Map<K, V> {
     @Override
     public V get(K key) {
         var tableValue = table[indexFor(hash(key.hashCode()))];
-        return (tableValue == null || !tableValue.key.equals(key)) ? null : tableValue.value;
+        return (tableValue == null
+                || (hash(tableValue.key.hashCode()) != hash(key.hashCode())
+                || !tableValue.key.equals(key)))
+                ? null : tableValue.value;
     }
 
     @Override
     public boolean remove(K key) {
         var index = indexFor(hash(key.hashCode()));
         var rsl = false;
-        if (table[index] != null && table[index].key.equals(key)) {
+        if (table[index] != null
+                && hash(table[index].key.hashCode()) == hash(key.hashCode())
+                && table[index].key.equals(key)) {
             table[index].value = null;
             table[index].key = null;
             table[index] = null;
