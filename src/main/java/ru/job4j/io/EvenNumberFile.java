@@ -3,6 +3,7 @@ package ru.job4j.io;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.IOException;
 
 public class EvenNumberFile {
     public static void main(String[] args) {
@@ -23,7 +24,7 @@ public class EvenNumberFile {
                     }
                 }
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
