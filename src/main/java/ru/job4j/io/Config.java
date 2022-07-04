@@ -27,7 +27,8 @@ public class Config {
                     .forEach(str -> {
                         var index = str.indexOf('=');
                         if (index == 0 || index == (str.length() - 1)) {
-                            throw new IllegalArgumentException();
+                            throw new IllegalArgumentException("Строка \'" + str
+                                    + "\' не соответствует шаблону");
                         }
                         values.put(str.substring(0, index), str.substring(index + 1));
                     });
@@ -58,5 +59,4 @@ public class Config {
     public static void main(String[] args) {
         System.out.println(new Config("app.properties"));
     }
-
 }
