@@ -6,9 +6,8 @@ import java.util.function.Predicate;
 
 public class Analizy {
     public void unavailable(String source, String target) {
-        StringJoiner result = new StringJoiner(System.lineSeparator());
-        StringJoiner rslHelp = new StringJoiner(";");
-        try (BufferedReader in = new BufferedReader(new FileReader(source))) {
+        try (BufferedReader in = new BufferedReader(new FileReader(source));
+                PrintWriter out = new PrintWriter(new FileOutputStream(target))) {
             var sourceSplit = in.lines()
                     .map(s -> s.split(" "))
                     .toList();
@@ -16,20 +15,13 @@ public class Analizy {
             for (String[] str : sourceSplit) {
                 boolean status = "400".equals(str[0]) || "500".equals(str[0]);
                 if (status && !openInterval) {
-                    rslHelp.add(str[1]);
+                    out.print(str[1] + ";");
                     openInterval = true;
                 } else if (openInterval && !status) {
-                    rslHelp.add(str[1]);
+                    out.println(str[1] + ";");
                     openInterval = false;
-                    result.add(rslHelp + ";");
-                    rslHelp = new StringJoiner(";");
                 }
             }
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        try (PrintWriter out = new PrintWriter(new FileOutputStream(target))) {
-            out.println(result);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
