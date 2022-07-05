@@ -1,8 +1,6 @@
 package ru.job4j.io;
 
 import java.io.*;
-import java.util.StringJoiner;
-import java.util.function.Predicate;
 
 public class Analizy {
     public void unavailable(String source, String target) {
