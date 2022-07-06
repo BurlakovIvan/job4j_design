@@ -20,6 +20,16 @@ public class Search {
         if (args.length != 2) {
             throw new IllegalArgumentException("Root folder is null");
         }
+        if (args[0] == null || args[1] == null) {
+            throw new NullPointerException("Null аргумент");
+        }
+        var index = args[0].indexOf(":\\");
+        if (index < 0) {
+            throw new IllegalArgumentException("Wrong first argument");
+        }
+        if (!args[1].startsWith(".")) {
+            throw new IllegalArgumentException("Wrong second argument");
+        }
     }
 
     public static List<Path> search(Path root, Predicate<Path> condition) throws IOException {
