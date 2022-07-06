@@ -18,7 +18,7 @@ public class FileSearchDuplicate extends SimpleFileVisitor<Path> {
                 .values()
                 .stream()
                 .filter(p -> p.size() > 1)
-                .forEach(System.out::println);
+                .forEach(p -> p.forEach(System.out::println));
     }
 
     @Override
