@@ -1,5 +1,7 @@
 package ru.job4j.io;
 
+import ru.job4j.io.duplicates.FileSearchDuplicate;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,6 +13,11 @@ public class Search {
     public static void main(String[] args) throws IOException {
         Path start = Paths.get(".");
         search(start, p -> p.toFile().getName().endsWith(".js")).forEach(System.out::println);
+
+        FileSearchDuplicate file = new FileSearchDuplicate();
+        Files.walkFileTree(start, file);
+        file.printFileDuplicates();
+
     }
 
     public static List<Path> search(Path root, Predicate<Path> condition) throws IOException {
