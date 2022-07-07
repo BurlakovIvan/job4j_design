@@ -17,7 +17,7 @@ public class Search {
         search(start, p -> p.toFile().getName().endsWith(fileExtension)).forEach(System.out::println);
     }
 
-    private static void validation(String[] args) throws IllegalArgumentException {
+    public static void validation(String[] args) throws IllegalArgumentException {
         if (args.length != 2) {
             throw new IllegalArgumentException("Root folder is null");
         }
@@ -29,7 +29,7 @@ public class Search {
             throw new IllegalArgumentException(String.format("Not directory %s", file.getAbsoluteFile()));
         }
         if (!args[1].startsWith(".")) {
-            throw new IllegalArgumentException("Wrong second argument");
+            throw new IllegalArgumentException("Wrong type files '" + args[1] + "'");
         }
     }
 
