@@ -20,13 +20,17 @@ public class EchoServer {
                             answer = "Hello, dear friend.";
                         } else if (str.contains("?msg=Exit")) {
                             server.close();
-                            break;
+                            answer = "Exit";
                         } else {
                             String[] strAnswer = str.split(" ");
                             for (String s : strAnswer) {
                                 if (s.contains("?msg=")) {
-                                    answer = s.split("=")[1];
-                                    break;
+                                    var stringSplit = s.split("=");
+                                    if (stringSplit.length > 1) {
+                                        answer = stringSplit[1];
+                                    } else {
+                                        answer = "NULL";
+                                    }
                                 }
                             }
                         }
