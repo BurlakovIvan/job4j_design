@@ -46,9 +46,9 @@ public class ConsoleChat {
         do {
             phrase = scanner.nextLine();
             log.add(phrase);
-            if ((phrase.equals(OUT) || phrase.equals(STOP)) && state) {
+            if ((OUT.equals(phrase) || STOP.equals(phrase)) && state) {
                 state = false;
-            } else if (phrase.equals(CONTINUE) && !state) {
+            } else if (CONTINUE.equals(phrase) && !state) {
                 state = true;
             }
             if (state) {
@@ -56,7 +56,7 @@ public class ConsoleChat {
                 System.out.println(answer);
                 log.add(answer);
             }
-        } while (!phrase.equals(OUT));
+        } while (!OUT.equals(phrase));
         saveLog(log);
     }
 
