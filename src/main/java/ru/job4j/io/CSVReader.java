@@ -20,7 +20,7 @@ public class CSVReader {
             throw new IllegalArgumentException(String.format("Not exist %s", path));
         }
         if (Files.isDirectory(path)) {
-            throw new IllegalArgumentException(String.format("Not file %s", path));
+            throw new IllegalArgumentException(String.format("%s isn't file ", path));
         }
         if (!path.toString().endsWith(".csv")) {
             throw new IllegalArgumentException("Wrong type files '" + path + "'. Must be .csv");
@@ -82,5 +82,9 @@ public class CSVReader {
             outResult.add(outWriteArray(indexColumnList, delimiter, str));
         }
         outWrite(out, outResult);
+    }
+
+    public static void main(String[] args) throws Exception {
+        CSVReader.handle(ArgsName.of(args));
     }
 }
