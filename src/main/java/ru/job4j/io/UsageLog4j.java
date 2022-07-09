@@ -19,5 +19,10 @@ public class UsageLog4j {
         LOG.debug("byte : {}, short : {}, int : {}, long : {}, "
                 + "char : {}, float : {}, double : {}, boolean : {}",
                 age, amount, count, distance, gender,  height, distanceSpace, correct);
+        try {
+            throw new Exception("Not supported code");
+        } catch (Exception e) {
+            LOG.error("Exception in log example", e);
+        }
     }
 }
