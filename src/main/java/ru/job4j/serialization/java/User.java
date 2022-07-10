@@ -1,11 +1,7 @@
 package ru.job4j.serialization.java;
 
 import java.util.Arrays;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import javax.xml.bind.annotation.*;
-import java.io.StringWriter;
 
 @XmlRootElement(name = "user")
 @XmlAccessorType(XmlAccessType.FIELD)
