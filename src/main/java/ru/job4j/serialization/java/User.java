@@ -28,6 +28,26 @@ public class User {
         this.conditions = conditions;
     }
 
+    public boolean isAccess() {
+        return access;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public String[] getConditions() {
+        return conditions;
+    }
+
     @Override
     public String toString() {
         return "User{"
