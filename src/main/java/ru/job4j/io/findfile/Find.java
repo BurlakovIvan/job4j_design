@@ -29,9 +29,7 @@ public class Find {
 
     private static boolean findMask(String fileName, String maskName) {
         Pattern mask = Pattern.compile('^' + maskName.replace(".", "[.]")
-                .replace("*", ".*").replace("?", ".")
-                .replace("__DOT__", "[.]").replace("__STAR__", ".*")
-                .replace("__QM__", ".") + '$');
+                .replace("*", ".*").replace("?", ".") + '$');
         Matcher matcher = mask.matcher(fileName);
         return matcher.find();
     }
@@ -58,7 +56,7 @@ public class Find {
 
     private static void record(List<Path> paths, String out) {
         try (PrintWriter pw = new PrintWriter(
-                new FileWriter(out, Charset.forName("Windows-1251"), true))) {
+                new FileWriter(out, Charset.forName("Windows-1251"), false))) {
             paths.forEach(pw::println);
         } catch (IOException exception) {
             exception.printStackTrace();
