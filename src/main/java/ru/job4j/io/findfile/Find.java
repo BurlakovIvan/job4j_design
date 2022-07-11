@@ -9,6 +9,8 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.function.Predicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Find {
 
@@ -25,10 +27,19 @@ public class Find {
         }
     }
 
+    private static boolean findMask(String fileName, String maskName) {
+        Pattern mask = Pattern.compile('^' + maskName.replace(".", "[.]")
+                .replace("*", ".*").replace("?", ".")
+                .replace("__DOT__", "[.]").replace("__STAR__", ".*")
+                .replace("__QM__", ".") + '$');
+        Matcher matcher = mask.matcher(fileName);
+        return matcher.find();
+    }
+
     private static Predicate<Path> predicate(String type, String name) {
         Predicate<Path> pr;
         if ("mask".equals(type)) {
-            pr = p -> p.toFile().getName().matches("." + name);
+            pr = p -> findMask(p.toFile().getName(), name);
         } else if ("name".equals(type)) {
             pr = p -> p.toFile().getName().equals(name);
         } else if ("regex".equals(type)) {
@@ -40,11 +51,9 @@ public class Find {
     }
 
     private static List<Path> search(String directory, String nameFile, String type) throws IOException {
-        List<Path> rsl;
         SearchFiles searcher = new SearchFiles(predicate(type, nameFile));
         Files.walkFileTree(Path.of(directory), searcher);
-        rsl = searcher.getPaths();
-        return rsl;
+        return searcher.getPaths();
     }
 
     private static void record(List<Path> paths, String out) {
