@@ -1,4 +1,6 @@
-package ru.job4j.io;
+package ru.job4j.io.findfile;
+
+import ru.job4j.io.SearchFiles;
 
 import java.io.File;
 import java.io.IOException;
