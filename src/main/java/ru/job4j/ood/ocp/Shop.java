@@ -1,16 +1,24 @@
 package ru.job4j.ood.ocp;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /*
-Класс магазин не получится расширить так как метод buy всегда возвращает
-определнный тип, можно заменить на дженерик, так же как и поле класса
+В обьявление переменной, в параметрах метода goodsSorted и в возвращаемых методах
+присутсвует реализация, а не абстракция
  */
 
 public class Shop {
-    private List<Meat> goods;
+    private ArrayList<Food> goods;
 
-    public Meat buy(int indexGoods) {
+    public Food buy(int indexGoods) {
         return goods.get(indexGoods);
+    }
+
+    public ArrayList<Food> goodsSorted(ArrayList<Food> foods) {
+         return foods
+                 .stream()
+                 .sorted()
+                 .collect(Collectors.toCollection(ArrayList::new));
     }
 }
