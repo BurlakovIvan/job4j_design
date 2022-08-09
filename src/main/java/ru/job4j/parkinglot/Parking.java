@@ -1,28 +1,46 @@
 package ru.job4j.parkinglot;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Класс парковки машин
  */
-public class Parking {
+public class Parking implements CarParking {
 
-    List<CarParking> parkingPlace;
+    private int autoParkingSize;
+    private int truckParkingSize;
 
-    public Parking(List<CarParking> parkingPlace) {
-        this.parkingPlace = parkingPlace;
+    private List<Car> autoParking;
+    private List<Car> truckParking;
+
+    public Parking(int autoParkingSize, int truckParkingSize) {
+        this.autoParkingSize = autoParkingSize;
+        this.truckParkingSize = truckParkingSize;
+        autoParking = new ArrayList<>(autoParkingSize);
+        truckParking = new ArrayList<>(truckParkingSize);
     }
 
-    void parkingCar(List<Car> cars) {
-       /*
-       Здесь будем парковать машины на паркову
-        */
-    }
-
-    Car carLeftParking(Car car) {
+    @Override
+    public boolean park(Car car) {
         /*
-        Машина уехала с парковки
+        метод парковки
          */
+        return false;
+    }
+
+    @Override
+    public List<Car> getParkedAutos() {
+        return new ArrayList<>(autoParking);
+    }
+
+    @Override
+    public List<Car> getParkedTrucks() {
+        return new ArrayList<>(truckParking);
+    }
+
+    @Override
+    public Car carLeavingParking(Car car) {
         return null;
     }
 }

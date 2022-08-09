@@ -8,16 +8,15 @@ import java.util.Objects;
 public class Auto implements Car {
 
     private final String name;
-    private final int size;
+    public static final int SIZE = 1;
 
     public Auto(String name) {
-        this.size = 1;
         this.name = name;
     }
 
     @Override
     public int getSize() {
-        return size;
+        return SIZE;
     }
 
     @Override
@@ -34,11 +33,11 @@ public class Auto implements Car {
             return false;
         }
         Auto auto = (Auto) o;
-        return size == auto.size && Objects.equals(name, auto.name);
+        return Objects.equals(name, auto.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, size);
+        return Objects.hash(name);
     }
 }

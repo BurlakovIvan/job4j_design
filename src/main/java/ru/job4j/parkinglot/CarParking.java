@@ -6,13 +6,11 @@ import java.util.List;
  * Общий интерфейс парковки
  */
 public interface CarParking {
-    void park(Car car);
+    boolean park(Car car);
 
-    int getNumberParkingPlace();
+    List<Car> getParkedAutos();
 
-    List<Car> findAll();
+    List<Car> getParkedTrucks();
 
-    int getFreeParkingPlace();
-
-    Car carLeftParking(Car car);
+    Car carLeavingParking(Car car);
 }

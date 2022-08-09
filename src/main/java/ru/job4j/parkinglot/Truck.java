@@ -5,12 +5,12 @@ import java.util.Objects;
 /**
  * Грузовые машины
  */
-public class Track implements Car {
+public class Truck implements Car {
     private final String name;
     private final int size;
 
-    public Track(String name, int size) {
-        if (size < 2) {
+    public Truck(String name, int size) {
+        if (size <= Auto.SIZE) {
             throw new IllegalArgumentException("Это не грузовая машина");
         }
         this.name = name;
@@ -35,8 +35,8 @@ public class Track implements Car {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Track track = (Track) o;
-        return size == track.size && Objects.equals(name, track.name);
+        Truck truck = (Truck) o;
+        return size == truck.size && Objects.equals(name, truck.name);
     }
 
     @Override
