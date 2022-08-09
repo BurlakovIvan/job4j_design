@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Shop implements Store {
+    private static final int TWENTY_FIVE = 25;
+    private static final int SEVENTY_FIVE = 75;
+    private static final int HUNDRED = 100;
     private List<Food> foods = new ArrayList<>();
 
     @Override

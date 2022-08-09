@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Trash implements Store {
+    private static final int HUNDRED = 100;
     private List<Food> foods = new ArrayList<>();
 
     @Override

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Warehouse implements Store {
-
+    private static final int TWENTY_FIVE = 25;
     private List<Food> foods = new ArrayList<>();
 
     @Override

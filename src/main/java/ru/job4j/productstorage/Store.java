@@ -5,10 +5,6 @@ import java.util.List;
 
 public interface Store {
 
-    int TWENTY_FIVE = 25;
-    int SEVENTY_FIVE = 75;
-    int HUNDRED = 100;
-
     List<Food> findAll();
 
     boolean add(Food food);
