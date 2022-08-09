@@ -3,7 +3,7 @@ package ru.job4j.productstorage;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Food {
+public abstract class Food {
 
     protected String name;
     protected LocalDate expiryDate;
@@ -37,22 +37,5 @@ public class Food {
 
     public LocalDate getCreateDate() {
         return createDate;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Food food = (Food) o;
-        return Double.compare(food.price, price) == 0 && Double.compare(food.discount, discount) == 0 && Objects.equals(name, food.name) && Objects.equals(expiryDate, food.expiryDate) && Objects.equals(createDate, food.createDate);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, expiryDate, createDate, price, discount);
     }
 }

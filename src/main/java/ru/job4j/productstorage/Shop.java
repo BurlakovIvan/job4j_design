@@ -12,12 +12,13 @@ public class Shop implements Store {
     }
 
     @Override
-    public boolean add(Food food, int percentExpiryDate) {
+    public boolean add(Food food) {
         boolean success = false;
-        if (percentExpiryDate >= 25 && percentExpiryDate <= 75) {
+        int percentExpiry = percentExpiryDate(food);
+        if (percentExpiry >= TWENTY_FIVE && percentExpiry <= SEVENTY_FIVE) {
             foods.add(food);
             success = true;
-        } else if (percentExpiryDate > 75 && percentExpiryDate < 100) {
+        } else if (percentExpiry > SEVENTY_FIVE && percentExpiry < HUNDRED) {
             food.setPrice(food.getPrice() - food.getPrice() * food.getDiscount() / 100);
             foods.add(food);
             success = true;

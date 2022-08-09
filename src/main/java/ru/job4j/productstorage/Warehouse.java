@@ -13,9 +13,9 @@ public class Warehouse implements Store {
     }
 
     @Override
-    public boolean add(Food food, int percentExpiryDate) {
+    public boolean add(Food food) {
         boolean success = false;
-        if (percentExpiryDate < 25) {
+        if (percentExpiryDate(food) < TWENTY_FIVE) {
             foods.add(food);
             success = true;
         }

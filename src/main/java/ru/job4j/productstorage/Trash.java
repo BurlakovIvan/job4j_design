@@ -12,9 +12,9 @@ public class Trash implements Store {
     }
 
     @Override
-    public boolean add(Food food, int percentExpiryDate) {
+    public boolean add(Food food) {
         boolean success = false;
-        if (percentExpiryDate >= 100) {
+        if (percentExpiryDate(food) >= HUNDRED) {
             foods.add(food);
             success = true;
         }
