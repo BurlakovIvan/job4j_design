@@ -1,6 +1,5 @@
 package ru.job4j.ood.isp.menu;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class TODOApp {
@@ -27,7 +26,11 @@ public class TODOApp {
             } else if (menuChoice == NEW_TASK) {
                 System.out.println("Введи название основной задачи:");
                 String parentName = sc.nextLine();
-                menu.add(Menu.ROOT, parentName, STUB_ACTION);
+                if ("".equals(parentName)) {
+                    parentName = null;
+                } else {
+                    menu.add(Menu.ROOT, parentName, STUB_ACTION);
+                }
                 System.out.println("Введи название задачи");
                 String childName = sc.nextLine();
                 menu.add(parentName, childName, STUB_ACTION);

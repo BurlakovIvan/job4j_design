@@ -2,12 +2,14 @@ package ru.job4j.ood.isp.menu;
 
 public class Print implements MenuPrinter {
 
+    private static final String INDENTS = "----";
+
     @Override
     public void print(Menu menu) {
         StringBuilder builder = new StringBuilder();
         for (Menu.MenuItemInfo menuItem : menu) {
             String[] split = menuItem.getNumber().split("\\.");
-            String repeat = "----".repeat(split.length - 1);
+            String repeat = INDENTS.repeat(split.length - 1);
             builder
                     .append(repeat)
                     .append(menuItem.getName())

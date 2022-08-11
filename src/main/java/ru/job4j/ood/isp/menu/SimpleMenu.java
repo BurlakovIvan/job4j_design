@@ -10,7 +10,7 @@ public class SimpleMenu implements Menu {
     public boolean add(String parentName, String childName, ActionDelegate actionDelegate) {
         boolean rsl = true;
         if (findItem(childName).isPresent()) {
-            rsl = false;
+            return false;
         } else if (Objects.equals(parentName, Menu.ROOT)) {
             rootElements.add(new SimpleMenuItem(childName, actionDelegate));
         } else {
@@ -28,14 +28,8 @@ public class SimpleMenu implements Menu {
 
     @Override
     public Optional<MenuItemInfo> select(String itemName) {
-        Optional<ItemInfo> findItem = findItem(itemName);
-        if (findItem.isPresent()) {
-            var menuItem = findItem.get();
-            var rsl = new MenuItemInfo(menuItem.menuItem, menuItem.number);
-            return Optional.of(rsl);
-        } else {
-            return Optional.empty();
-        }
+        return findItem(itemName)
+                .map(menuItem -> new MenuItemInfo(menuItem.menuItem, menuItem.number));
     }
 
     @Override
