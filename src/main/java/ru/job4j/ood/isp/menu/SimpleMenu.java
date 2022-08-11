@@ -8,22 +8,21 @@ public class SimpleMenu implements Menu {
 
     @Override
     public boolean add(String parentName, String childName, ActionDelegate actionDelegate) {
-        boolean rsl = true;
         if (findItem(childName).isPresent()) {
             return false;
-        } else if (Objects.equals(parentName, Menu.ROOT)) {
-            rootElements.add(new SimpleMenuItem(childName, actionDelegate));
-        } else {
-            Optional<ItemInfo> findItem = findItem(parentName);
-            if (findItem.isPresent()) {
-                ItemInfo itemInfo = findItem.get();
-                List<MenuItem> menuItemParent = itemInfo.menuItem.getChildren();
-                menuItemParent.add(new SimpleMenuItem(childName, actionDelegate));
-            } else {
-                rsl = false;
-            }
         }
-        return rsl;
+        if (Objects.equals(parentName, Menu.ROOT)) {
+            rootElements.add(new SimpleMenuItem(childName, actionDelegate));
+            return true;
+        }
+        Optional<ItemInfo> findItem = findItem(parentName);
+        if (findItem.isPresent()) {
+            ItemInfo itemInfo = findItem.get();
+            List<MenuItem> menuItemParent = itemInfo.menuItem.getChildren();
+            menuItemParent.add(new SimpleMenuItem(childName, actionDelegate));
+            return true;
+        }
+        return false;
     }
 
     @Override
