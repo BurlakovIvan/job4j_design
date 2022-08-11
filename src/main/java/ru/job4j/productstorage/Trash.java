@@ -21,4 +21,9 @@ public class Trash implements Store {
         }
         return success;
     }
+
+    @Override
+    public void clear() {
+        foods.clear();
+    }
 }

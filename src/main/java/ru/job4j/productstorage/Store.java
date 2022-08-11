@@ -14,4 +14,6 @@ public interface Store {
         long differentFull = food.getExpiryDate().toEpochDay() - food.getCreateDate().toEpochDay();
         return differentFull == 0 ? 100 : Math.round(differentCurrentDate * 100 / differentFull);
     }
+
+    void clear();
 }

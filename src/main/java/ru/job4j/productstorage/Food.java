@@ -1,7 +1,6 @@
 package ru.job4j.productstorage;
 
 import java.time.LocalDate;
-import java.util.Objects;
 
 public abstract class Food {
 
@@ -37,5 +36,9 @@ public abstract class Food {
 
     public LocalDate getCreateDate() {
         return createDate;
+    }
+
+    public void setExpiryDate(LocalDate expiryDate) {
+        this.expiryDate = expiryDate;
     }
 }

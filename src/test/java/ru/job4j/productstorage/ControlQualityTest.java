@@ -92,4 +92,30 @@ class ControlQualityTest {
         assertThat(trash.findAll()).isEqualTo(List.of(meat));
         assertThat(warehouse.findAll()).isEqualTo(List.of(bread));
     }
+
+
+    @Test
+    public void whenFoodResort() {
+        Food milk = new Milk("milk", LocalDate.now().plusDays(12),
+                LocalDate.now().minusDays(12), 150, 10);
+        Food meat = new Meat("meat", LocalDate.now().minusDays(8),
+                LocalDate.now().minusMonths(8), 500, 15);
+        Food bread = new Bread("bread", LocalDate.now().plusDays(8),
+                LocalDate.now().minusDays(1), 40, 5);
+        Warehouse warehouse = new Warehouse();
+        Shop shop = new Shop();
+        Trash trash = new Trash();
+        ControlQuality control = new ControlQuality(List.of(warehouse, shop, trash));
+        List<Food> actual = List.of(milk, meat, bread);
+        control.redistribution(actual);
+        assertThat(shop.findAll()).isEqualTo(List.of(milk));
+        assertThat(trash.findAll()).isEqualTo(List.of(meat));
+        assertThat(warehouse.findAll()).isEqualTo(List.of(bread));
+        /*
+        у мяса увеличиваем срок годности
+         */
+        meat.setExpiryDate(LocalDate.now().plusDays(1));
+        control.resort();
+        assertThat(shop.findAll()).isEqualTo(List.of(milk, meat));
+    }
 }

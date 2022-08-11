@@ -1,5 +1,6 @@
 package ru.job4j.productstorage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ControlQuality {
@@ -18,5 +19,14 @@ public class ControlQuality {
                 }
             }
         }
+    }
+
+    public void resort() {
+        List<Food> foods = new ArrayList<>();
+        stores.forEach(store -> {
+                    foods.addAll(store.findAll());
+                    store.clear();
+        });
+        redistribution(foods);
     }
 }

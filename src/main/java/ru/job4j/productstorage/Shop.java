@@ -28,4 +28,9 @@ public class Shop implements Store {
         }
         return success;
     }
+
+    @Override
+    public void clear() {
+        foods.clear();
+    }
 }
