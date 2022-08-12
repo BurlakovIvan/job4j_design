@@ -11,6 +11,4 @@ public interface CarParking {
     List<Car> getParkedAutos();
 
     List<Car> getParkedTrucks();
-
-    Car carLeavingParking(Car car);
 }

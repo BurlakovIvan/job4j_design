@@ -21,12 +21,33 @@ public class Parking implements CarParking {
         truckParking = new ArrayList<>(truckParkingSize);
     }
 
+    private boolean validation(Car car) {
+        if (car.getSize() == Auto.SIZE)  {
+            return autoParkingSize > 0;
+        }
+        return truckParkingSize > 0 || autoParkingSize >= car.getSize();
+    }
+
     @Override
     public boolean park(Car car) {
-        /*
-        метод парковки
-         */
-        return false;
+        if (!validation(car)) {
+            return false;
+        }
+        if (car.getSize() == Auto.SIZE) {
+            autoParking.add(car);
+            autoParkingSize--;
+            return true;
+        }
+        if (truckParkingSize > 0) {
+            truckParking.add(car);
+            truckParkingSize--;
+            return true;
+        }
+        for (int i = 0; i < car.getSize(); i++) {
+            autoParking.add(car);
+        }
+        autoParkingSize -= car.getSize();
+        return true;
     }
 
     @Override
@@ -39,8 +60,4 @@ public class Parking implements CarParking {
         return new ArrayList<>(truckParking);
     }
 
-    @Override
-    public Car carLeavingParking(Car car) {
-        return null;
-    }
 }

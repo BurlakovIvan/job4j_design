@@ -60,6 +60,20 @@ class ParkingTest {
         Car kamaz = new Truck("KAMAZ", 4);
         Car maz = new Truck("MAZ", 3);
         Car lada = new Auto("LADA");
+        parking.park(kamaz);
+        parking.park(maz);
+        parking.park(lada);
         assertThat(parking.getParkedAutos()).isEqualTo(List.of(maz, maz, maz, lada));
+    }
+
+    @Test
+    public void whenNotPlaceForAuto() {
+        Parking parking = new Parking(2, 1);
+        Car toyota = new Auto("TOYOTA");
+        Car bmv = new Auto("BMV");
+        Car lada = new Auto("LADA");
+        assertTrue(parking.park(toyota));
+        assertTrue(parking.park(bmv));
+        assertFalse(parking.park(lada));
     }
 }
