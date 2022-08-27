@@ -42,7 +42,7 @@ VALUES ('Мастер и Маргарита', 1, 1, 670.99, 3),
        ('Черный человек', 3, 2, 570.20, 6),
        ('Лирика', 4, 2, 518.99, 2);
        
-SELECT title, name_author, name_genre, price, amount
+CREATE VIEW authors_popular_gente AS SELECT title, name_author, name_genre, price, amount
     FROM author 
     INNER JOIN book ON author.author_id = book.author_id
     INNER JOIN genre ON  book.genre_id = genre.genre_id
