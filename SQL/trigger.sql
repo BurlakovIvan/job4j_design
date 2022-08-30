@@ -8,6 +8,9 @@ create table if not exists products (
     price integer
 );
 
+insert into products (name, producer, count, price)
+   VALUES ('product_0', 'producer_0', 1, 10);
+
 /* 2.1
 */
 create or replace function tax()
@@ -15,7 +18,9 @@ create or replace function tax()
 $$
     BEGIN
         update products
-        set price = price + price * 0.2;
+        set price = price + price * 0.2
+        where id = (select id
+                    from inserted);
         return new;
     END;
 $$
@@ -26,11 +31,11 @@ create trigger tax_trigger
     referencing new table as inserted
     for each statement
     execute procedure tax();
-    
+
 insert into products (name, producer, count, price)
    VALUES ('product_1', 'producer_1', 3, 50);
-    
-SELECT * FROM products;  
+
+SELECT * FROM products;
 
 drop trigger tax_trigger on products;
 
@@ -40,8 +45,7 @@ create or replace function discount()
     returns trigger as
 $$
     BEGIN
-        update products
-        set price = price - price * 0.2;
+        NEW.price = NEW.price - NEW.price * 0.2;
         return NEW;
     END;
 $$
@@ -52,11 +56,11 @@ create trigger discount_trigger
     on products
     for each row
     execute procedure discount();
-    
+
 insert into products (name, producer, count, price)
    VALUES ('product_2', 'producer_2', 10, 80);
-    
-SELECT * FROM products;  
+
+SELECT * FROM products;
 
 drop trigger discount_trigger on products;
 
@@ -83,12 +87,12 @@ $$
 LANGUAGE 'plpgsql';
 
 create trigger history_price_trigger
-    after insert 
+    after insert
     on products
     for each row
     execute procedure insert_history();
-    
+
 insert into products (name, producer, count, price)
    VALUES ('product_3', 'producer_3', 2, 100);
-   
-SELECT * FROM history_of_price;   
+
+SELECT * FROM history_of_price;
