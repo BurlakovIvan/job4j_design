@@ -39,6 +39,10 @@ VALUES ('Гарри Поттер и узник Азкабана', 'Джоан Р
 --все уникальные названия произведений из таблиц movie и book
 
  SELECT title AS name FROM book
- UNION
+ EXCEPT
  SELECT name FROM movie
+ UNION ALL
+ (SELECT name FROM movie
+ EXCEPT
+ SELECT title FROM book)
  ORDER BY name;
